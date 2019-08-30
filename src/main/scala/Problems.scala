@@ -50,10 +50,52 @@ object Problems extends App {
 
   }
 
-  val xs = List(1, 1, 2, 3, 5, 8)
+  /*
+    P04 (*) Find the number of elements of a list.
+    Example:
+    scala> length(List(1, 1, 2, 3, 5, 8))
+    res0: Int = 6
+   */
+  def length[A](as: List[A]): Int = {
+    @scala.annotation.tailrec
+    def go(as: List[A], count: Int = 0): Int = as match {
+      case Nil => count
+      case _::xs => go(xs, count + 1)
+    }
+
+    go(as)
+  }
+
+  /*
+  P05 (*) Reverse a list.
+  Example:
+    scala> reverse(List(1, 1, 2, 3, 5, 8))
+  res0: List[Int] = List(8, 5, 3, 2, 1, 1)
+   */
+
+  def reverse[A](as: List[A]): List[A] = {
+    @scala.annotation.tailrec
+    def go(as: List[A], newList: List[A] = Nil): List[A] = as match {
+      case Nil => newList
+      case x::xs => go(xs, x +: newList)
+    }
+
+    as match {
+      case Nil => Nil
+      case xs => go(xs)
+
+    }
+
+  }
+
+
+
+
+    val xs = List(1, 1, 2, 3, 5, 8)
 
   print(last(xs))
   print(penultimate(xs))
   print(nth(2, xs))
+  print(reverse(xs))
 
 }
